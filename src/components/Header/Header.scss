@@ -1,0 +1,15 @@
+@use '../../sass/abstracts/variables';
+
+.header {
+  color: variables.$clr-light-mode-text;
+  padding: 20px 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: variables.$clr-dark-elements;
+  margin-bottom: 20px;
+}
+
+.header__logo {
+  font-size: 20px;
+}

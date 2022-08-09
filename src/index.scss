@@ -1,0 +1,80 @@
+@use './sass/abstracts/variables';
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: variables.$ff;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  background-color: variables.$clr-dark-background;
+}
+
+article {
+  background: variables.$clr-dark-elements;
+  transition: all 0.3s;
+
+  &:hover {
+    transform: scale(1.1);
+    transition: all 0.3s;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 50px;
+  padding: 20px;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 20px 100px;
+  }
+}
+
+.flag__section img {
+  object-fit: cover;
+  height: 150px;
+  width: 100%;
+}
+
+.details {
+  padding: 20px;
+  color: variables.$clr_light-mode-text;
+  border-radius: 0 0 5px 5px;
+}
+
+
+
+
+
+
+
+

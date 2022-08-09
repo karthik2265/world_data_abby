@@ -1,0 +1,33 @@
+@use '../../sass/abstracts/variables';
+
+.filter {
+  color: variables.$clr-light-mode-text;
+  padding: 0 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form__input input {
+  border: none;
+  outline: none;
+  background-color: variables.$clr-dark-elements;
+  padding: 10px 15px;
+  width: 250px;
+  border-radius: 5px;
+  color: variables.$clr_light-mode-text;
+}
+
+.form__input input::placeholder {
+  color: variables.$clr_light-mode-text;
+}
+
+.filter__regions select{
+  background-color: variables.$clr-dark-elements;
+  border: none;
+  padding: 10px 15px;
+  color: variables.$clr_light-mode-text;
+  border-radius: 5px;
+  font-family: variables.$ff;
+  letter-spacing: 0.5px;
+}
