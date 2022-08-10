@@ -25,19 +25,19 @@ const initialState = {
 function filterCountries(countries, searchTerm, selectedRegion) {
   searchTerm = searchTerm.toLowerCase()
   selectedRegion = selectedRegion.toLowerCase()
-  const filteredCountries = countries.map(country => {
+  const filteredCountries = countries.filter(country => {
     // get name and region of the country in lowe case 
     const name = country.name.common.toLowerCase()
     const region = country.region.toLowerCase()
     // check if this country should be shown or filtered-out
     // in this case we dont need to filter
-    if (searchTerm === "" && selectedRegion === "Filter by region") return true
+    if (searchTerm == "" && selectedRegion === "filter by region") return true
     // in this case we only filter by region
-    if (searchTerm === "") {
+    if (searchTerm == "") {
       return region.includes(selectedRegion)
     }
     // in this case we only filter by searchTerm
-    if (selectedRegion === "Filter by region") {
+    if (selectedRegion === "filter by region") {
       return name.includes(searchTerm)
     }
     // in this case we filter by both
@@ -50,13 +50,15 @@ const countriesSlice = createSlice({
   name: "countries",
   initialState,
   reducers: {
-    updateSearchTerm: (state, { newSearchTerm }) => {
+    updateSearchTerm: (state, { payload }) => {
+      const newSearchTerm = payload
       state.searchTerm = newSearchTerm
       const allCountries = state.countries
       const region = state.selectedRegion
       state.filteredCountries = filterCountries(allCountries, newSearchTerm, region)
     },
-    updateSelectedRegion: (state, { newSelectedRegion }) => {
+    updateSelectedRegion: (state, { payload }) => {
+      const newSelectedRegion = payload
       state.selectedRegion = newSelectedRegion;
       const allCountries = state.countries;
       const searchTerm = state.searchTerm;
@@ -76,6 +78,7 @@ const countriesSlice = createSlice({
 })
 
 export default countriesSlice.reducer;
+export const countriesActions = countriesSlice.actions
 export const getAllCountries = (state) => state.countries.countries;
 export const getSelectedCountry = (state) => state.countries.selectedCountry;
 export const getFilteredCountries = (state) => state.countries.filteredCountries
