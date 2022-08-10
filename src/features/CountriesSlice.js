@@ -78,3 +78,4 @@ const countriesSlice = createSlice({
 export default countriesSlice.reducer;
 export const getAllCountries = (state) => state.countries.countries;
 export const getSelectedCountry = (state) => state.countries.selectedCountry;
+export const getFilteredCountries = (state) => state.countries.filteredCountries

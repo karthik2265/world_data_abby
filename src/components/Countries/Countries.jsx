@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getAllCountries, fetchAsyncCountries } from '../../features/CountriesSlice';
+import { getFilteredCountries, fetchAsyncCountries } from '../../features/CountriesSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import './Countries.scss'
 
@@ -12,7 +12,7 @@ const Countries = () => {
     dispatch(fetchAsyncCountries())
   },[])
 
-  const countries = useSelector(getAllCountries)
+  const countries = useSelector(getFilteredCountries)
   console.log(countries);
   
   return (
