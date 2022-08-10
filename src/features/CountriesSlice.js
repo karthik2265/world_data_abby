@@ -13,17 +13,60 @@ export const fetchAsyncCountryDetail = createAsyncThunk('countries/fetchAyncCoun
 
 const initialState = {
   countries: [],
-  selectedCountry: []
+  filteredCountries: [],
+  selectedCountry: [],
+  searchTerm: "",
+  selectedRegion: "",
+}
+
+// utility functions
+
+// this function returns filtered countries based on searchTerm and selectedRegion
+function filterCountries(countries, searchTerm, selectedRegion) {
+  searchTerm = searchTerm.toLowerCase()
+  selectedRegion = selectedRegion.toLowerCase()
+  const filteredCountries = countries.map(country => {
+    // get name and region of the country in lowe case 
+    const name = country.name.common.toLowerCase()
+    const region = country.region.toLowerCase()
+    // check if this country should be shown or filtered-out
+    // in this case we dont need to filter
+    if (searchTerm === "" && selectedRegion === "Filter by region") return true
+    // in this case we only filter by region
+    if (searchTerm === "") {
+      return region.includes(selectedRegion)
+    }
+    // in this case we only filter by searchTerm
+    if (selectedRegion === "Filter by region") {
+      return name.includes(searchTerm)
+    }
+    // in this case we filter by both
+    return name.includes(searchTerm) && region.includes(selectedRegion)
+  })
+  return filteredCountries
 }
 
 const countriesSlice = createSlice({
   name: "countries",
   initialState,
-  reducers: {},
+  reducers: {
+    updateSearchTerm: (state, { newSearchTerm }) => {
+      state.searchTerm = newSearchTerm
+      const allCountries = state.countries
+      const region = state.selectedRegion
+      state.filteredCountries = filterCountries(allCountries, newSearchTerm, region)
+    },
+    updateSelectedRegion: (state, { newSelectedRegion }) => {
+      state.selectedRegion = newSelectedRegion;
+      const allCountries = state.countries;
+      const searchTerm = state.searchTerm;
+      state.filteredCountries = filterCountries(allCountries, searchTerm, newSelectedRegion)
+    }
+  },
   extraReducers: {
     [fetchAsyncCountries.fulfilled]: (state, {payload}) => {
       console.log('Fulfilled');
-      return {...state, countries:payload}
+      return {...state, countries:payload, filteredCountries: payload}
     },
     [fetchAsyncCountryDetail.fulfilled]: (state, {payload}) => {
       console.log('Fulfilled');
